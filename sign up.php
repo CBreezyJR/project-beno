@@ -16,8 +16,11 @@
 
 <form class="row g-3">
   <div class="col-md-6">
-    <label for="inputEmail4" class="form-label">Email</label>
-    <input type="email" class="form-control" id="inputEmail4">
+    <label for="inputEmail4" class="form-label" for="validationServer01">Email</label>
+    <input type="email" class="form-control" id="validationServer01"" class="form-control is-valid" required>
+    <div class="valid-feedback">
+      looks good
+    </div>
   </div><br>
   <div class="col-md-6">
     <label for="inputPassword4" class="form-label">Password</label>
@@ -42,17 +45,24 @@
   <div class="col-md-4">
     <label for="inputState" class="form-label">Role</label>
     <select id="inputState" class="form-select">
-      <option selected>Choose...</option>
+      <option selected>IT consultant</option>
       <option>Business Man</option>
       <option>Business Woman</option>
       <option>Tech consultant</option>
       <option>Student</option>
     </select>
   </div>
-  
+  <div class="col-12">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+      <label class="form-check-label" for="invalidCheck2">
+        Agree to terms and conditions
+      </label>
+    </div>
+  </div>
   
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+    <button type="submit" class="btn btn-primary">Proceed</button>
   </div>
 </form>
 
