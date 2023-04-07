@@ -10,89 +10,59 @@
 
 <body>
 
+<h2> Choose your topic of interest: </h2>
+<style>
+  
+</style>
 
 
+<form action="news.php">
 
-<form>
+<div   aria-label="Basic checkbox toggle button group">
+  <div class="row">
+   
+    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck1">#Networking</label><br>
+  
+
+   
+    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck2">#Industry</label><br>
+   
  
+   
+   <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck3">#Mechanics</label><br>
+   
 
-<div class="container text-center">
-  <div class="row justify-content-start">
-    <div class="col-4">
-      One of two columns
-    </div>
-    <div class="col-4">
-      One of two columns
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-4">
-      One of two columns
-    </div>
-    <div class="col-4">
-      One of two columns
-    </div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col-4">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btncheck1">#Cryptocurrency</label>
-    </div>
-    <div class="col-4">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-      <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btncheck1">#Technology</label>
-    </div>
-  </div>
-  <div class="row justify-content-around">
-    <div class="col-4">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btncheck1">#Sales</label>
-    </div>
-    <div class="col-4">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btncheck1">#Social Media</label>
-    </div>
-  </div>
-  <div class="row justify-content-between">
-    <div class="col-4">
-    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-     <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btncheck1">#Branding</label>
-    </div>
-    <div class="col-4">
-      One of two columns
-    </div>
-  </div>
-  <div class="row justify-content-evenly">
-    <div class="col-4">
-      One of two columns
-    </div>
-    <div class="col-4">
-      One of two columns
-    </div>
+   <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck4">#CrptoCurrency</label><br>
+
+   <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck5">#Transport</label><br>
+
+   <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck6">#Manufacturing</label><br>
+
+   <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck7">#Food</label><br>
+
+
+   <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck8">#Stock Market</label><br>
+
+   <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck9">#Social Media</label><br>
+
+   <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
+   <label class="btn btn-outline-primary" for="btncheck10">#Branding</label><br>
+  </div> <br>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Ok,got it</button>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 </form>
 
