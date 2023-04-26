@@ -33,8 +33,9 @@
                     
                     <div class="">
                         
-                        <p class="card-text">LEARN,CONTRIBUTE AND CHALLENGE</p>
+                        
                        <br> <a href="login.php" class="btn btn-primary">Sign in</a>
+                       
                         <a href="sign up.php" class="btn btn-primary">Sign up</a>
                     </div>
                 </div>
