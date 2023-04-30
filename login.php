@@ -3,14 +3,14 @@ session_start();
 $error='';
 
 if(isset($_POST['submit'])){
-    if(empty($_POST['email']) || empty($_POST['password'])){
+    if(empty($_POST['email']) || empty($_POST['password'])) {
         $error = "Please enter your username and password";
     }
     else{
-        $username=$_POST['email'];
+        $email=$_POST['email'];
         $password=$_POST['password'];
         $connection = mysqli_connect("localhost", "email", "password");
-        $username = stripslashes($email);
+        $email = stripslashes($email);
         $password = stripslashes($password);
         $username = mysqli_real_escape_string($connection,$username);
         $password = mysqli_real_escape_string($connection,$password);
