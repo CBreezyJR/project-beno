@@ -6,9 +6,9 @@ if (isset($_POST['btn_post'])) {
   $title = $_POST['title_post'];
   $content = $_POST['content_post'];
   $img = "";
-  
+  $title=mysqli_real_escape_string($conn,$title);
+  $content = mysqli_real_escape_string($conn,$content);
   if (isset($_FILES['img_post'])) {
-    echo "uploaded img";
     move_uploaded_file($_FILES["img_post"]["tmp_name"], $_FILES["img_post"]["name"]);
     $img = $_FILES['img_post']['name'];
   }else{
@@ -37,7 +37,7 @@ if (isset($_POST['btn_post'])) {
           $tagID = $row['category_id'];
           $tagInsertQuery = "insert into post_category_relation values($insertedID,$tagID)";
           mysqli_query($conn,$tagInsertQuery);
-         header('location:news.php');
+         
         }else{
           echo mysqli_error($conn);
         };
@@ -48,7 +48,7 @@ if (isset($_POST['btn_post'])) {
     echo "Error: " . $query . "<br>" . mysqli_error($conn);
   };
 
-  
+  header('location:news.php');
 }
 
 
@@ -164,7 +164,7 @@ if (isset($_POST['btn_post'])) {
 
 
   <!-- POSTING BUTTON  -->
-  <a href="javascript:$('#btn_post').click();">
+  <a href="javascript:history.back();">
     <div class="floating-button d-none d-md-block ">
       <div style="display:flex; flex:1 1 auto; height:100%; flex-direction:column; justify-content:center; align-items:center;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -178,68 +178,8 @@ if (isset($_POST['btn_post'])) {
 </body>
 
 <div class="d-flex d-inline flex-row ">
-  <div class="sidebar vh-100 flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi pe-none me-2" width="30" height="24">
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-      <span class="fs-5 fw-semibold">USER NAME</span>
-    </a>
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          TOPIC
-        </button>
-        <div class="collapse show" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">C++</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">JAVA</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">PYTHON</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          POPULAR
-        </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Weekly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Monthly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Annually</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Orders
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Processed</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Shipped</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Returned</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New...</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
+  
+  <?php require('sidebar.php');?>
 
   <div style="flex:1 1 auto"></div>
 

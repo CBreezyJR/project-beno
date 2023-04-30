@@ -1,7 +1,6 @@
 <?php
-if (isset($_POST['title'])) {
-  echo "set again?";
-}
+
+require('db.php');
 
 ?>
 
@@ -76,87 +75,66 @@ if (isset($_POST['title'])) {
 </body>
 
 <div class="d-flex d-inline flex-row ">
-  <div class="sidebar vh-100 flex-shrink-0 p-3 bg-light" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi pe-none me-2" width="30" height="24">
-        <use xlink:href="#bootstrap"></use>
-      </svg>
-      <span class="fs-5 fw-semibold">USER NAME</span>
-    </a>
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          TOPIC
-        </button>
-        <div class="collapse show" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">C++</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">JAVA</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">PYTHON</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          POPULAR
-        </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Weekly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Monthly</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Annually</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Orders
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Processed</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Shipped</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Returned</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New...</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
 
+  <?php require('sidebar.php');?>
 
+  <?php
 
+  function get_rand_img($img)
+  {
+    $searchImg = glob($img, GLOB_BRACE);
+    if (!$img || !$searchImg) {
+      $imageDir = 'altimg\\';
+      $images = glob($imageDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+      $randomImage = $images[array_rand($images)];
+      return $randomImage;
+    } else {
+      return $img;
+    }
+    $searchImg = null;
+  }
+
+  ?>
   <!-- scrollerble Pane -->
   <div class="row row-cols-1 row-cols-md-2 g-4 scrollerble">
 
 
+    <?php
+
+
+    if (isset($_GET['tag'])) {
+      $query = "SELECT * From post inner join " . "(SELECT post_id , category.tag FROM post_category_relation inner join category on post_category_relation.category_id=category.category_id where category.category_id=" . $_GET['tag'] . " order by post_id) q on post.post_id=q.post_id;";
+      $res = mysqli_query($conn, $query);
+    } else {
+      $query = 'select * from post order by post_id desc';
+      $res = mysqli_query($conn, $query);
+    }
+
+    $num_rows = mysqli_num_rows($res);
+
+    for ($i = 0; $i < $num_rows; $i++) {
+      $row = mysqli_fetch_assoc($res);
+
+
+      echo '
+  <a style="text-decoration:none;" href="read.php?pn=' . $row['post_id'] . '">
     <div class="col">
-      <div class="card">
-        <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            This is a longer card with supporting texassdfasdfasdfasdfst below as a natural lead-in to
-            additional content. This asdfasdfasdfasdf is a little bit longer.
-          </p>
-        </div>
+    <div class="card">
+      <img src="' . get_rand_img($row['main_img']) . '" class="card-img-top" alt="Hollywood Sign on The Hill" />
+      <div class="card-body">
+        <h5 class="card-title">' . $row['title'] . '</h5>
+        <p class="card-text">' . $row['content'] . '
+        </p>
       </div>
     </div>
+  </div>
+  </a>
+
+  ';
+    }
+
+    ?>
+
 
 
     <div class="col">
@@ -171,6 +149,9 @@ if (isset($_POST['title'])) {
         </div>
       </div>
     </div>
+
+
+
     <div class="col">
       <div class="card">
         <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top" alt="Los Angeles Skyscrapers" />
@@ -181,6 +162,8 @@ if (isset($_POST['title'])) {
         </div>
       </div>
     </div>
+
+
     <div class="col">
       <div class="card">
         <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers" />
@@ -193,6 +176,10 @@ if (isset($_POST['title'])) {
         </div>
       </div>
     </div>
+
+
+
+
   </div>
 </div>
 
