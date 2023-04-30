@@ -1,3 +1,36 @@
+<?php
+session_start();
+$error='';
+
+if(isset($_POST['submit'])){
+    if(empty($_POST['email']) || empty($_POST['password'])){
+        $error = "Please enter your username and password";
+    }
+    else{
+        $username=$_POST['email'];
+        $password=$_POST['password'];
+        $connection = mysqli_connect("localhost", "email", "password");
+        $username = stripslashes($email);
+        $password = stripslashes($password);
+        $username = mysqli_real_escape_string($connection,$username);
+        $password = mysqli_real_escape_string($connection,$password);
+
+        $db = mysqli_select_db($connection,"dbphp");
+        $query = mysqli_query($connection,"SELECT * FROM users WHERE password='$password' AND email='$email'");
+        $rows = mysqli_num_rows($query);
+        if($rows == 1){
+            $_SESSION['login_user']=$email;
+            header("location: home.php");
+        }
+        else{
+            $error = "Username or Password is invalid";
+        }
+        mysqli_close($connection);
+    }
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 
