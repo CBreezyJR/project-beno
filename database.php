@@ -12,12 +12,14 @@ if(isset($_POST['submit'])){
         $first_name=$_POST['first name'];
         $last_name=$_POST['last name'];
         $role=$_POST['role'];
+        
         $connection = mysqli_connect("localhost", "email", "password","first name","last name","role");
         $email = stripslashes($email);
         $password = stripslashes($password);
         $first_name = stripslashes($first_name);
         $last_name = stripslashes($last_name);
         $role = stripslashes($role);
+
         $email = mysqli_real_escape_string($connection,$email);
         $password = mysqli_real_escape_string($connection,$password);
         $first_name = mysqli_real_escape_string($connection,$first_name);
