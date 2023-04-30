@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 05:51 AM
+-- Generation Time: Apr 30, 2023 at 04:43 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -40,7 +40,8 @@ INSERT INTO `category` (`category_id`, `tag`) VALUES
 (1, 'OS'),
 (2, 'DBMS'),
 (3, 'Computer Network'),
-(4, 'Data Structure');
+(4, 'Data Structure'),
+(5, 'Java');
 
 -- --------------------------------------------------------
 
@@ -53,8 +54,31 @@ CREATE TABLE `comment` (
   `text` varchar(200) NOT NULL,
   `commentor_id_ref` int(11) NOT NULL,
   `post_id_ref` int(11) NOT NULL,
-  `likes` int(11) DEFAULT NULL
+  `likes` int(11) DEFAULT NULL,
+  `comment_depth` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`comment_id`, `text`, `commentor_id_ref`, `post_id_ref`, `likes`, `comment_depth`) VALUES
+(1, 'good post I comment', 1, 39, NULL, 0),
+(2, 'comment2', 1, 40, NULL, 0),
+(3, '12', 1, 40, NULL, 0),
+(4, 'why no', 1, 40, NULL, 0),
+(5, 'asdf', 1, 40, NULL, 0),
+(6, 'asdhel', 1, 40, NULL, 0),
+(7, 'hell yeh', 1, 40, NULL, 0),
+(8, 'you did it dude', 1, 39, NULL, 0),
+(9, 'readlly', 1, 39, NULL, 0),
+(10, 'Thx! this is so good information!', 1, 41, NULL, 0),
+(11, 'so what you want', 1, 41, NULL, 0),
+(12, 'this is useless information', 1, 41, NULL, 0),
+(13, 'asdf', 1, 42, NULL, 0),
+(14, 'asdfasdf', 1, 42, NULL, 0),
+(15, 'Good job', 1, 42, NULL, 0),
+(16, 'Os is very good program', 1, 21, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -122,7 +146,24 @@ INSERT INTO `post` (`post_id`, `title`, `content`, `main_img`, `likes`) VALUES
 (23, 'about diagram', 'this is my diagram atached hope you enjoy', '', 0),
 (24, 'asdf', 'asdf', '', 0),
 (25, 'this is my img', 'does it look good?', 'img1.png', 0),
-(26, 'Java Is good', 'Java is OOPS LANGUAGE', 'img1.png', 0);
+(26, 'Java Is good', 'Java is OOPS LANGUAGE', 'img1.png', 0),
+(27, 'imlibrary', 'library is good place', 'img1.png', 0),
+(28, 'UPLOADING IMG IS GOOD', 'IM UPLOADING IMG CAN YOU /se?', 'img1.png', 0),
+(29, 'DIARY ON 28 APR', 'TODAY I ATE SAMOSA AND PANEER TOOFANI THALI AND some cheese thing', '', 0),
+(30, 'asdfasdf', 'adsf', '', 0),
+(31, 'asdfasdf', 'asdfasd', '', 0),
+(32, 'asdf', 'asdf', '', 0),
+(33, 'asdf', 'asdf', '', 0),
+(34, 'asdf', 'asdf', '', 0),
+(35, '.', '.', '', 0),
+(36, ',', ',', '', 0),
+(37, '.', '\'', '', 0),
+(38, '\'', '.', '', 0),
+(39, 'i want to implement some functionality with comment', 'but i don\'t know where to start from', '', 0),
+(40, 'here is my post', 'about good things', '', 0),
+(41, 'HOW TO CREATE PHP WEBSITE', '1. INSTALL XAMPP\r\n2. start with <?php?>\r\n3. echo is print\r\n4. learn other functioins\r\n5. practice \r\n\r\ngood luck guys', '', 0),
+(42, 'How to upload image easily', '1. Shfit + Windows + S\r\n2. goto pictures/screenshot \r\n\r\n3. upload Img!!!1', 'Screenshot 2023-04-29 205036.png', 0),
+(43, 'computer network tag', 'this post will have computer network tag', '', 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +190,15 @@ INSERT INTO `post_category_relation` (`post_id`, `category_id`) VALUES
 (23, 4),
 (25, 1),
 (26, 1),
-(26, 3);
+(26, 3),
+(27, 2),
+(27, 3),
+(28, 3),
+(29, 3),
+(33, 3),
+(34, 3),
+(43, 3),
+(43, 4);
 
 -- --------------------------------------------------------
 
@@ -213,19 +262,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `user`
